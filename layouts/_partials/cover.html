@@ -1,0 +1,5 @@
+{{- /* Returns the cover image resource of a page, or nil. */ -}}
+{{- $img := "" }}
+{{- with .Params.cover }}{{ $img = $.Resources.GetMatch . }}{{ end }}
+{{- if not $img }}{{ $img = .Resources.GetMatch "cover.*" }}{{ end }}
+{{- return $img }}

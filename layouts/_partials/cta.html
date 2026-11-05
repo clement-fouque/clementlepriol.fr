@@ -1,0 +1,8 @@
+<section class="section cta" aria-labelledby="cta-title">
+  <div class="container">
+    <p class="eyebrow">{{ T "nav_contact" }}</p>
+    <h2 class="cta__title" id="cta-title" data-reveal>{{ T "home_contact_title" }}</h2>
+    <p data-reveal>{{ T "home_contact_text" }}</p>
+    {{ with site.GetPage "/contact" }}<a class="btn btn--light" href="{{ .RelPermalink }}" data-reveal>{{ T "write_me" }} <span class="arrow" aria-hidden="true">→</span></a>{{ end }}
+  </div>
+</section>

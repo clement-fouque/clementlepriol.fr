@@ -1,0 +1,8 @@
+{{- /* Params: img, w, rw, rh. Returns a WebP variant of width w (cropped to rw:rh if set). */ -}}
+{{- $r := "" }}
+{{- if .rw }}
+  {{- $r = .img.Fill (printf "%dx%d webp q78 Smart" .w (div (mul .w .rh) .rw)) }}
+{{- else }}
+  {{- $r = .img.Resize (printf "%dx webp q78" .w) }}
+{{- end }}
+{{- return $r }}

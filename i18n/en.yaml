@@ -1,0 +1,56 @@
+nav_home: Home
+nav_creations: Works
+nav_diy: DIY / Open source
+nav_about: About
+nav_contact: Contact
+nav_legal: Legal notice
+skip_to_content: Skip to content
+menu: Menu
+close: Close
+switch_language: Passer en français
+main_navigation: Main navigation
+footer_navigation: Footer links
+social: Social networks
+hero_cta_creations: See the works
+hero_cta_diy: Read the DIY projects
+hero_scroll: Scroll
+home_featured_creations: Featured works
+home_latest_diy: Latest DIY projects
+home_about_title: Who am I?
+home_contact_title: A project, an idea, a collaboration?
+home_contact_text: Let's swap ideas, tips and tricks. Drop me a line.
+see_all: See all
+read_more: Read more
+read_project: Read the project
+write_me: Write to me
+filter_all: All
+filter_label: Filter by category
+empty_section: First entries coming soon.
+cat_stage: Stage
+cat_electronics: Electronics
+cat_traditional: Traditional
+diff_beginner: Beginner
+diff_intermediate: Intermediate
+diff_advanced: Advanced
+difficulty: Difficulty
+materials: Materials
+category: Category
+published_on: Published on
+reading_time:
+  one: 1 min read
+  other: "{{ .Count }} min read"
+source_code: Source code
+view_on_github: View on GitHub
+previous: Previous
+next: Next
+back_to: Back to
+video_play: "Play video: {{ . }}"
+video_consent: The video loads from {{ . }} when clicked.
+email_noscript: "contact [at] clementlepriol [dot] fr"
+not_found_title: Page not found
+not_found_text: This page has gone dark. Head back to the light.
+back_home: Back to home
+toc: Contents
+rss: RSS feed
+made_with: Handmade with Hugo, hosted on GitHub Pages.
+reading: Reading

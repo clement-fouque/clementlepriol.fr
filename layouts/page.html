@@ -1,0 +1,17 @@
+{{ define "main" }}
+{{- if in (slice "diy" "creations") .Section }}
+  {{ partial "article.html" . }}
+{{- else }}
+<header class="container page-head">
+  <p class="eyebrow">{{ site.Title }}</p>
+  <h1 class="page-head__title">{{ .Title }}</h1>
+  {{ with .Params.lead }}<p class="page-head__lead">{{ . }}</p>{{ end }}
+</header>
+{{- with partial "cover.html" . }}
+<div class="container article-cover">{{ partial "picture.html" (dict "img" . "alt" ($.Params.coverAlt | default "") "eager" true "sizes" "(min-width: 82rem) 82rem, 100vw" "ratio" "21x9") }}</div>
+{{- end }}
+<div class="container section section--tight">
+  <div class="prose">{{ .Content }}</div>
+</div>
+{{- end }}
+{{ end }}

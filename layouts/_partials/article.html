@@ -1,0 +1,47 @@
+{{- $cover := partial "cover.html" . }}
+{{- $section := .Parent }}
+<article>
+  <header class="container article-head">
+    <p class="eyebrow"><a href="{{ $section.RelPermalink }}">{{ $section.Title }}</a></p>
+    <h1 class="article-head__title">{{ .Title }}</h1>
+    {{ with .Params.summary }}<p class="article-head__summary">{{ . }}</p>{{ end }}
+    <dl class="facts">
+      {{- if eq .Section "diy" }}
+      <div><dt>{{ T "published_on" }}</dt><dd><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_long" }}</time></dd></div>
+      <div><dt>{{ T "reading" }}</dt><dd>{{ T "reading_time" .ReadingTime }}</dd></div>
+      {{- end }}
+      {{- with .Params.category }}<div><dt>{{ T "category" }}</dt><dd>{{ partial "category-label.html" . }}</dd></div>{{ end }}
+      {{- with .Params.difficulty }}<div><dt>{{ T "difficulty" }}</dt><dd>{{ T (printf "diff_%s" .) }}</dd></div>{{ end }}
+      {{- with .Params.repo }}<div><dt>{{ T "source_code" }}</dt><dd><a href="{{ . }}" rel="noopener" target="_blank">{{ T "view_on_github" }} ↗</a></dd></div>{{ end }}
+    </dl>
+    {{- with .Params.tags }}
+    <ul class="chip-list chip-list--spaced">{{ range . }}<li class="chip">{{ . }}</li>{{ end }}</ul>
+    {{- end }}
+  </header>
+
+  {{- with $cover }}
+  <figure class="container article-cover">
+    {{ partial "picture.html" (dict "img" . "alt" ($.Params.coverAlt | default "") "eager" true "sizes" "(min-width: 82rem) 82rem, 100vw") }}
+  </figure>
+  {{- else }}<div class="section--tight"></div>{{ end }}
+
+  <div class="container">
+    <div class="prose">{{ .Content }}</div>
+    {{- with .Params.materials }}
+    <aside class="materials" aria-labelledby="materials-title">
+      <h2 id="materials-title">{{ T "materials" }}</h2>
+      <ul class="chip-list">{{ range . }}<li class="chip">{{ . }}</li>{{ end }}</ul>
+    </aside>
+    {{- end }}
+
+    {{- $prev := .PrevInSection }}{{ $next := .NextInSection }}
+    {{- if or $prev $next }}
+    <nav class="pager" aria-label="{{ $section.Title }}">
+      <div>{{ with $next }}<a href="{{ .RelPermalink }}" rel="prev"><span class="eyebrow">← {{ T "previous" }}</span><span class="pager__title">{{ .Title }}</span></a>{{ end }}</div>
+      <div class="pager__next">{{ with $prev }}<a href="{{ .RelPermalink }}" rel="next"><span class="eyebrow">{{ T "next" }} →</span><span class="pager__title">{{ .Title }}</span></a>{{ end }}</div>
+    </nav>
+    {{- end }}
+  </div>
+</article>
+<div class="section--tight"></div>
+{{ partial "cta.html" . }}

@@ -1,0 +1,55 @@
+{{- $p := .page }}
+{{- $same := slice }}{{ range site.Params.social }}{{ $same = $same | append .url }}{{ end }}
+{{- $person := dict
+  "@type" "Person"
+  "@id" (printf "%s#person" (site.Home.Permalink))
+  "name" site.Params.author
+  "url" site.Home.Permalink
+  "sameAs" $same
+}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" site.Home.Permalink)
+  "url" site.Home.Permalink
+  "name" site.Title
+  "description" site.Params.description
+  "inLanguage" site.Language.Locale
+  "publisher" (dict "@id" (printf "%s#person" site.Home.Permalink))
+}}
+{{- $graph := slice $website $person }}
+
+{{- if and $p.IsPage (in (slice "diy" "creations") $p.Section) }}
+  {{- $type := cond (eq $p.Section "diy") "BlogPosting" "CreativeWork" }}
+  {{- $item := dict
+    "@type" $type
+    "@id" (printf "%s#article" $p.Permalink)
+    "headline" $p.Title
+    "name" $p.Title
+    "description" .desc
+    "url" $p.Permalink
+    "mainEntityOfPage" $p.Permalink
+    "inLanguage" site.Language.Locale
+    "datePublished" ($p.Date.Format "2006-01-02T15:04:05Z07:00")
+    "dateModified" ($p.Lastmod.Format "2006-01-02T15:04:05Z07:00")
+    "author" (dict "@id" (printf "%s#person" site.Home.Permalink))
+    "publisher" (dict "@id" (printf "%s#person" site.Home.Permalink))
+    "isPartOf" (dict "@id" (printf "%s#website" site.Home.Permalink))
+  }}
+  {{- with .image }}{{ $item = merge $item (dict "image" .Permalink) }}{{ end }}
+  {{- with $p.Params.tags }}{{ $item = merge $item (dict "keywords" (delimit . ", ")) }}{{ end }}
+  {{- with $p.Params.repo }}{{ $item = merge $item (dict "isBasedOn" .) }}{{ end }}
+  {{- if eq $p.Section "diy" }}{{ $item = merge $item (dict "wordCount" $p.WordCount) }}{{ end }}
+  {{- $graph = $graph | append $item }}
+{{- end }}
+
+{{- if not $p.IsHome }}
+  {{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" site.Title "item" site.Home.Permalink) }}
+  {{- $pos := 2 }}
+  {{- with $p.Parent }}{{ if not .IsHome }}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" .Title "item" .Permalink) }}
+    {{- $pos = add $pos 1 }}
+  {{- end }}{{ end }}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" $pos "name" $p.Title "item" $p.Permalink) }}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) }}
+{{- end }}
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@graph" $graph | jsonify | safeJS }}</script>

@@ -1,0 +1,6 @@
+{{- $main := resources.Get "js/main.js" | js.Build (dict "minify" true "target" "es2019") | resources.Fingerprint }}
+<script src="{{ $main.RelPermalink }}" integrity="{{ $main.Data.Integrity }}" defer></script>
+{{- if .IsHome }}
+{{- $hero := resources.Get "js/hero.js" | js.Build (dict "minify" true "target" "es2019") | resources.Fingerprint }}
+<script src="{{ $hero.RelPermalink }}" integrity="{{ $hero.Data.Integrity }}" defer></script>
+{{- end }}

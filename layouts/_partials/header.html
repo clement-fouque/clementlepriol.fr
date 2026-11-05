@@ -1,0 +1,22 @@
+{{- $current := . }}
+<header class="site-header" data-header>
+  <div class="container site-header__inner">
+    <a class="brand" href="{{ site.Home.RelPermalink }}" {{ if .IsHome }}aria-current="page"{{ end }}>
+      {{ partial "logo.html" }}
+      <span>{{ site.Title }}</span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" data-nav-toggle>
+      <span class="nav-toggle__bars" aria-hidden="true"></span>
+      <span class="visually-hidden">{{ T "menu" }}</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="{{ T "main_navigation" }}" data-nav>
+      <ul class="nav__list">
+        {{- range site.Menus.main }}
+        {{- $active := or ($current.IsMenuCurrent "main" .) ($current.HasMenuCurrent "main" .) }}
+        <li><a class="nav__link{{ if and $active (not ($current.IsMenuCurrent "main" .)) }} is-ancestor{{ end }}" href="{{ .URL }}" {{ if $current.IsMenuCurrent "main" . }}aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+      {{ partial "lang-switch.html" . }}
+    </nav>
+  </div>
+</header>

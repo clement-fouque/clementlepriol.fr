@@ -1,0 +1,19 @@
+{{- /* {{< video provider="youtube|vimeo" id="..." title="..." >}} — click-to-load, no third-party request before interaction */ -}}
+{{- $provider := .Get "provider" | default "youtube" }}
+{{- $id := .Get "id" }}
+{{- $title := .Get "title" | default "Video" }}
+{{- $src := "" }}{{ $thumb := "" }}{{ $name := "" }}
+{{- if eq $provider "vimeo" }}
+  {{- $src = printf "https://player.vimeo.com/video/%s?autoplay=1&dnt=1" $id }}{{ $name = "Vimeo" }}
+{{- else }}
+  {{- $src = printf "https://www.youtube-nocookie.com/embed/%s?autoplay=1&rel=0" $id }}{{ $name = "YouTube" }}
+  {{- $thumb = printf "https://i.ytimg.com/vi_webp/%s/hqdefault.webp" $id }}
+{{- end }}
+<div class="video" data-video data-src="{{ $src }}" data-title="{{ $title }}">
+  <button class="video__btn" type="button" aria-label="{{ T "video_play" $title }}">
+    {{ with $thumb }}<img src="{{ . }}" alt="" loading="lazy" decoding="async" width="480" height="360">{{ end }}
+    <span class="video__play" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z"/></svg></span>
+    <span class="video__note">{{ T "video_consent" $name }}</span>
+  </button>
+  <noscript><a href="{{ cond (eq $provider "vimeo") (printf "https://vimeo.com/%s" $id) (printf "https://www.youtube.com/watch?v=%s" $id) }}">{{ $title }} ({{ $name }})</a></noscript>
+</div>
