@@ -302,7 +302,7 @@ main { flex: 1; }
 .row__date { font-family: var(--font-mono); font-size: var(--step--1); color: var(--ink-soft); }
 .row__title { font-size: var(--step-2); font-weight: 700; letter-spacing: -0.03em; transition: color .3s; }
 .row__summary { color: var(--ink-soft); margin-top: .35rem; font-size: var(--step-0); }
-.row__thumb { border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 2; background: var(--surface-2); }
+.row__thumb { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 2; background: var(--surface-2); }
 .row__thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease-out); }
 .row__link:hover .row__title { color: var(--accent-ink); }
 .row__link:hover .row__thumb img { transform: scale(1.05); }
