@@ -1,0 +1,10 @@
+{{ define "main" }}
+<section class="container notfound">
+  <div>
+    <div class="notfound__code" data-code="404" aria-hidden="true"></div>
+    <h1 class="section__title">{{ T "not_found_title" }}</h1>
+    <p class="notfound__text">{{ T "not_found_text" }}</p>
+    <a class="btn btn--solid" href="{{ site.Home.RelPermalink }}">{{ T "back_home" }} <span class="arrow" aria-hidden="true">→</span></a>
+  </div>
+</section>
+{{ end }}

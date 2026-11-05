@@ -1,0 +1,5 @@
+{{- /* Obfuscated e-mail link: assembled client-side to keep the address away from naive scrapers */ -}}
+{{- $parts := split site.Params.email "@" }}
+{{- $rev := slice }}
+{{- range $parts }}{{ $s := "" }}{{ range split . "" }}{{ $s = print . $s }}{{ end }}{{ $rev = $rev | append $s }}{{ end }}
+<p><a class="email-link" href="#" data-email-user="{{ index $rev 0 }}" data-email-domain="{{ index $rev 1 }}"><span data-email-text>{{ T "email_noscript" }}</span></a></p>

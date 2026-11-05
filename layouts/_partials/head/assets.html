@@ -1,0 +1,10 @@
+{{- $css := resources.Get "css/main.css" | resources.Minify }}
+<link rel="preload" href="{{ "fonts/bricolage-grotesque-latin.woff2" | relURL }}" as="font" type="font/woff2" crossorigin>
+{{- /* Inlined: the stylesheet is small (~5 KB gzipped) and this removes the only render-blocking request */}}
+<style>{{ replace $css.Content "../fonts/" (relURL "fonts/") | safeCSS }}</style>
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<meta name="theme-color" content="#f5f2ec">
+{{- with .OutputFormats.Get "rss" }}
+<link rel="alternate" type="application/rss+xml" href="{{ .Permalink }}" title="{{ site.Title }}">
+{{- end }}

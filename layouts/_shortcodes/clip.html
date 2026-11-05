@@ -1,0 +1,10 @@
+{{- /* {{< clip src="images/x.mp4" alt="..." caption="..." >}} — short silent looping clip (replaces GIFs) */ -}}
+{{- $r := .Page.Resources.Get (.Get "src") }}
+{{- with $r }}
+<figure class="clip"{{ with $.Get "alt" }} aria-label="{{ . }}"{{ end }}>
+  <video src="{{ .RelPermalink }}" muted loop playsinline controls preload="none" data-clip></video>
+  {{- with $.Get "caption" }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
+{{- else }}
+  {{- errorf "clip: resource %q not found in %s" ($.Get "src") $.Page.File.Path }}
+{{- end }}

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}" class="no-js{{ if .IsHome }} has-hero{{ end }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.replace('no-js','js')</script>
+  {{ partial "head/seo.html" . }}
+  {{ partial "head/assets.html" . }}
+</head>
+<body>
+  <a class="skip-link" href="#main">{{ T "skip_to_content" }}</a>
+  {{ partial "header.html" . }}
+  <main id="main" tabindex="-1">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+  {{ partial "scripts.html" . }}
+</body>
+</html>

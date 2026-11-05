@@ -1,0 +1,19 @@
+{{- /* Params: page, sizes, eager, ratio, h (heading level, default 3) */ -}}
+{{- $p := .page }}
+{{- $h := .h | default 3 }}
+{{- $cover := partial "cover.html" $p }}
+<article class="card" data-reveal {{ with $p.Params.category }}data-filter-item="{{ . }}"{{ else }}data-filter-item{{ end }} data-card-glow>
+  <div class="card__media">
+    {{- with $cover }}
+      {{ partial "picture.html" (dict "img" . "alt" ($p.Params.coverAlt | default "") "sizes" ($.sizes | default "(min-width: 60rem) 33vw, 100vw") "eager" $.eager "ratio" ($.ratio | default "4x3")) }}
+    {{- else }}
+      <div class="card__placeholder" aria-hidden="true"></div>
+    {{- end }}
+  </div>
+  <div class="card__meta">
+    {{ with $p.Params.category }}<span class="chip chip--accent">{{ partial "category-label.html" . }}</span>{{ end }}
+    {{ if eq $p.Section "diy" }}<time class="chip" datetime="{{ $p.Date.Format "2006-01-02" }}">{{ $p.Date | time.Format ":date_medium" }}</time>{{ end }}
+  </div>
+  <h{{ $h }} class="card__title"><a href="{{ $p.RelPermalink }}">{{ $p.Title }}</a></h{{ $h }}>
+  {{ with $p.Params.summary }}<p class="card__summary">{{ . }}</p>{{ end }}
+</article>

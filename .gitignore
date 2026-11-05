@@ -1,0 +1,8 @@
+/public/
+/public-check/
+/.lighthouse/
+/resources/_gen/
+.hugo_build.lock
+.hugo.pid
+node_modules/
+.DS_Store

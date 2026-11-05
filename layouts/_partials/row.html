@@ -1,0 +1,17 @@
+{{- /* Params: page, h (heading level, default 3) */ -}}
+{{- $h := .h | default 3 }}
+{{- with .page }}
+{{- $cover := partial "cover.html" . }}
+<li class="row" data-reveal>
+  <a class="row__link" href="{{ .RelPermalink }}">
+    <time class="row__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_medium" }}</time>
+    <div>
+      <h{{ $h }} class="row__title">{{ .Title }}</h{{ $h }}>
+      {{ with .Params.summary }}<p class="row__summary">{{ . }}</p>{{ end }}
+    </div>
+    <div class="row__thumb">
+      {{- with $cover }}{{ partial "picture.html" (dict "img" . "alt" "" "sizes" "(min-width: 48rem) 14rem, 100vw" "ratio" "3x2") }}{{ else }}<div class="card__placeholder" aria-hidden="true"></div>{{ end }}
+    </div>
+  </a>
+</li>
+{{- end }}

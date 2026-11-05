@@ -1,0 +1,56 @@
+nav_home: Accueil
+nav_creations: Créations
+nav_diy: DIY / Open source
+nav_about: À propos
+nav_contact: Contact
+nav_legal: Mentions légales
+skip_to_content: Aller au contenu
+menu: Menu
+close: Fermer
+switch_language: Switch to English
+main_navigation: Navigation principale
+footer_navigation: Liens de pied de page
+social: Réseaux sociaux
+hero_cta_creations: Voir les créations
+hero_cta_diy: Lire les projets DIY
+hero_scroll: Défiler
+home_featured_creations: Créations à la une
+home_latest_diy: Derniers projets DIY
+home_about_title: Qui suis-je ?
+home_contact_title: Un projet, une idée, une collaboration ?
+home_contact_text: Échangeons idées, astuces et conseils. Écrivez-moi.
+see_all: Tout voir
+read_more: Lire la suite
+read_project: Lire le projet
+write_me: M'écrire
+filter_all: Tout
+filter_label: Filtrer par catégorie
+empty_section: Les premiers contenus arrivent bientôt.
+cat_stage: Scène
+cat_electronics: Électronique
+cat_traditional: Traditionnel
+diff_beginner: Débutant
+diff_intermediate: Intermédiaire
+diff_advanced: Avancé
+difficulty: Difficulté
+materials: Matériel
+category: Catégorie
+published_on: Publié le
+reading_time:
+  one: 1 min de lecture
+  other: "{{ .Count }} min de lecture"
+source_code: Code source
+view_on_github: Voir sur GitHub
+previous: Précédent
+next: Suivant
+back_to: Retour
+video_play: "Lire la vidéo : {{ . }}"
+video_consent: La vidéo est chargée depuis {{ . }} au clic.
+email_noscript: "contact [arobase] clementlepriol [point] fr"
+not_found_title: Page introuvable
+not_found_text: Cette page s'est éteinte. Revenez à la lumière.
+back_home: Retour à l'accueil
+toc: Sommaire
+rss: Flux RSS
+made_with: Fait main avec Hugo, hébergé sur GitHub Pages.
+reading: Lecture

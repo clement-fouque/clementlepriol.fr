@@ -1,0 +1,113 @@
+baseURL = "https://clement-fouque.github.io/clementlepriol.fr/"
+title = "Clément Le Priol"
+copyright = "Clément Le Priol"
+defaultContentLanguage = "fr"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+enableGitInfo = false
+timeZone = "Europe/Paris"
+disableKinds = ["taxonomy", "term"]
+
+[languages]
+  [languages.fr]
+    locale = "fr-FR"
+    label = "Français"
+    weight = 1
+    [languages.fr.params]
+      description = "Clément Le Priol — créations lumineuses, électronique et bricolage open source pour le théâtre d'impro et la scène."
+      tagline = "Créer. Partager. Recommencer."
+  [languages.en]
+    locale = "en-GB"
+    label = "English"
+    weight = 2
+    [languages.en.params]
+      description = "Clément Le Priol — light installations, electronics and open-source DIY for improv theatre and the stage."
+      tagline = "Make. Share. Repeat."
+
+[params]
+  author = "Clément Le Priol"
+  # Search engine indexing. Keep false while the site lives on github.io;
+  # set to true once www.clementlepriol.fr points here.
+  indexing = false
+  email = "contact@clementlepriol.fr"
+  ogImage = "images/og-default.jpg"
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/Peemouse"
+    icon = "github"
+  # [[params.social]]
+  #   name = "Instagram"
+  #   url = "https://www.instagram.com/<handle>/"
+  #   icon = "instagram"
+
+[outputs]
+  home = ["html", "rss"]
+  section = ["html", "rss"]
+  page = ["html"]
+
+[sitemap]
+  changeFreq = "monthly"
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = false
+  [markup.goldmark.parser.attribute]
+    block = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+  [markup.highlight]
+    noClasses = false
+
+[imaging]
+  [imaging.jpeg]
+    quality = 82
+  [imaging.webp]
+    quality = 78
+  resampleFilter = "Lanczos"
+  [imaging.exif]
+    disableLatLong = true
+
+[minify]
+  [minify.tdewolff.html]
+    keepEndTags = true
+    keepQuotes = true
+
+
+[security]
+  [security.funcs]
+    getenv = ["^HUGO_", "^CI$"]
+
+
+  [[languages.fr.menus.main]]
+    name = "Créations"
+    pageRef = "/creations"
+    weight = 10
+  [[languages.fr.menus.main]]
+    name = "DIY / Open source"
+    pageRef = "/diy"
+    weight = 20
+  [[languages.fr.menus.main]]
+    name = "À propos"
+    pageRef = "/about"
+    weight = 30
+  [[languages.fr.menus.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 40
+  [[languages.en.menus.main]]
+    name = "Works"
+    pageRef = "/creations"
+    weight = 10
+  [[languages.en.menus.main]]
+    name = "DIY / Open source"
+    pageRef = "/diy"
+    weight = 20
+  [[languages.en.menus.main]]
+    name = "About"
+    pageRef = "/about"
+    weight = 30
+  [[languages.en.menus.main]]
+    name = "Contact"
+    pageRef = "/contact"
+    weight = 40

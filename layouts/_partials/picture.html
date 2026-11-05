@@ -1,0 +1,21 @@
+{{- /* Responsive image. Params: img (resource), alt, sizes, eager (bool), class, ratio ("4x3", optional crop) */ -}}
+{{- $img := .img }}
+{{- $rw := 0 }}{{ $rh := 0 }}
+{{- with .ratio }}{{ $parts := split . "x" }}{{ $rw = int (index $parts 0) }}{{ $rh = int (index $parts 1) }}{{ end }}
+{{- if in (slice "gif" "svg+xml") $img.MediaType.SubType }}
+<img src="{{ $img.RelPermalink }}" alt="{{ .alt }}"{{ with .class }} class="{{ . }}"{{ end }}{{ with $img.Width }} width="{{ . }}" height="{{ $img.Height }}"{{ end }} loading="{{ if .eager }}eager{{ else }}lazy{{ end }}" decoding="async">
+{{- else }}
+  {{- $srcset := slice }}
+  {{- $last := "" }}
+  {{- range slice 480 800 1200 1600 2000 }}
+    {{- if le . $img.Width }}
+      {{- $last = partial "img-variant.html" (dict "img" $img "w" . "rw" $rw "rh" $rh) }}
+      {{- $srcset = $srcset | append (printf "%s %dw" $last.RelPermalink $last.Width) }}
+    {{- end }}
+  {{- end }}
+  {{- if not $last }}
+    {{- $last = partial "img-variant.html" (dict "img" $img "w" $img.Width "rw" $rw "rh" $rh) }}
+    {{- $srcset = slice (printf "%s %dw" $last.RelPermalink $last.Width) }}
+  {{- end }}
+<img src="{{ $last.RelPermalink }}" srcset="{{ delimit $srcset ", " }}" sizes="{{ .sizes | default "100vw" }}" width="{{ $last.Width }}" height="{{ $last.Height }}" alt="{{ .alt }}"{{ with .class }} class="{{ . }}"{{ end }}{{ if .eager }} fetchpriority="high"{{ else }} loading="lazy"{{ end }} decoding="async">
+{{- end }}

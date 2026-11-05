@@ -1,0 +1,16 @@
+{{- $u := urls.Parse .Destination }}
+{{- $img := "" }}
+{{- if not $u.IsAbs }}{{ $img = .Page.Resources.Get (strings.TrimPrefix "./" $u.Path) }}{{ end }}
+{{- $alt := .PlainText }}
+{{- if .IsBlock }}
+<figure{{ with .Attributes.class }} class="{{ . }}"{{ end }}>
+  {{- with $img }}
+    {{ partial "picture.html" (dict "img" . "alt" $alt "sizes" "(min-width: 64rem) 56rem, 100vw") }}
+  {{- else }}
+    <img src="{{ .Destination | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">
+  {{- end }}
+  {{- with .Title }}<figcaption>{{ . | markdownify }}</figcaption>{{ end }}
+</figure>
+{{- else }}
+  {{- with $img }}{{ partial "picture.html" (dict "img" . "alt" $alt "sizes" "(min-width: 64rem) 40rem, 100vw") }}{{ else }}<img src="{{ .Destination | safeURL }}" alt="{{ $alt }}" loading="lazy" decoding="async">{{ end }}
+{{- end }}
