@@ -14,7 +14,7 @@ social: Social networks
 hero_cta_creations: See the works
 hero_cta_diy: Read the DIY projects
 hero_scroll: Scroll
-home_featured_creations: Featured works
+home_featured_creations: Now showing
 home_latest_diy: Latest DIY projects
 home_about_title: Who am I?
 home_contact_title: A project, an idea, a collaboration?
@@ -54,3 +54,16 @@ toc: Contents
 rss: RSS feed
 made_with: Handmade with Hugo, hosted on GitHub Pages.
 reading: Reading
+kicker_note: "Director's note"
+kicker_now_showing: Works
+kicker_cue_list: Cue list
+kicker_curtain_call: Curtain call
+stage_jardin: Stage right
+stage_cour: Stage left
+ghost_light: The ghost light — the lamp that keeps watch over empty stages.
+cue_col: Q
+col_project: Project
+col_date: Date
+col_duration: Length
+tech_sheet: Tech sheet
+go: GO

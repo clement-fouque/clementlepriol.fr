@@ -1,0 +1,8 @@
+{{- /* Page header lit by an overhead "douche". Params: page, kicker, count */ -}}
+<header class="page-head">
+  <div class="container">
+    <p class="kicker">{{ .kicker | default site.Title }}{{ with .count }} <span class="kicker__count">({{ printf "%02d" . }})</span>{{ end }}</p>
+    <h1 class="page-head__title">{{ .page.Title }}</h1>
+    {{ with .page.Params.lead }}<p class="page-head__lead">{{ . }}</p>{{ end }}
+  </div>
+</header>

@@ -1,0 +1,5 @@
+{{- /* Category chip styled as a lighting gel swatch. Param: category key */ -}}
+{{- $gels := dict "stage" "106" "electronics" "132" "traditional" "103" }}
+{{- with . }}
+<span class="gel gel--{{ . }}"><span class="gel__swatch" aria-hidden="true"></span><span class="gel__ref" aria-hidden="true">L{{ index $gels . | default "000" }}</span>{{ partial "category-label.html" . }}</span>
+{{- end }}

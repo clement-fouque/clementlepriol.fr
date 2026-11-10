@@ -23,7 +23,7 @@ if (toggle && nav) {
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && nav.classList.contains('is-open')) { setOpen(false); toggle.focus(); }
   });
-  window.matchMedia('(min-width: 52.01rem)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
+  window.matchMedia('(min-width: 54.01rem)').addEventListener('change', (e) => { if (e.matches) setOpen(false); });
 }
 
 // Reveal on scroll
@@ -39,16 +39,50 @@ if (!reduceMotion && 'IntersectionObserver' in window) {
   revealables.forEach((el) => el.classList.add('is-visible'));
 }
 
-// Card glow follows the pointer
-document.querySelectorAll('[data-card-glow]').forEach((card) => {
-  const media = card.querySelector('.card__media');
-  if (!media) return;
-  card.addEventListener('pointermove', (e) => {
-    const r = media.getBoundingClientRect();
-    media.style.setProperty('--mx', `${((e.clientX - r.left) / r.width) * 100}%`);
-    media.style.setProperty('--my', `${((e.clientY - r.top) / r.height) * 100}%`);
-  });
-});
+// Home stage: the name is lit by the ghost light, and a follow spot tracks the pointer
+const stage = document.querySelector('[data-stage]');
+const title = stage && stage.querySelector('[data-lit]');
+const bulb = stage && stage.querySelector('.servante__bulb');
+if (stage && title && bulb) {
+  const placeLight = () => {
+    const t = title.getBoundingClientRect();
+    const b = bulb.getBoundingClientRect();
+    title.style.setProperty('--lx', `${b.left + b.width / 2 - t.left}px`);
+    title.style.setProperty('--ly', `${b.top + b.height / 2 - t.top}px`);
+  };
+  placeLight();
+  window.addEventListener('resize', placeLight, { passive: true });
+  if (document.fonts) document.fonts.ready.then(placeLight);
+  setTimeout(placeLight, 2200); // after the load sequence settles
+
+  if (!reduceMotion && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    const target = { x: 0, y: 0 };
+    const spot = { x: 0, y: 0 };
+    let raf = 0;
+    let started = false;
+    const render = () => {
+      spot.x += (target.x - spot.x) * 0.14;
+      spot.y += (target.y - spot.y) * 0.14;
+      const s = stage.getBoundingClientRect();
+      const t = title.getBoundingClientRect();
+      stage.style.setProperty('--px', `${spot.x - s.left}px`);
+      stage.style.setProperty('--py', `${spot.y - s.top}px`);
+      title.style.setProperty('--sx', `${spot.x - t.left}px`);
+      title.style.setProperty('--sy', `${spot.y - t.top}px`);
+      raf = Math.hypot(target.x - spot.x, target.y - spot.y) > 0.5 ? requestAnimationFrame(render) : 0;
+    };
+    stage.addEventListener('pointermove', (e) => {
+      target.x = e.clientX; target.y = e.clientY;
+      if (!started) { started = true; spot.x = target.x; spot.y = target.y; stage.classList.add('is-spot'); }
+      if (!raf) raf = requestAnimationFrame(render);
+    }, { passive: true });
+    stage.addEventListener('pointerleave', () => {
+      stage.classList.remove('is-spot');
+      title.style.setProperty('--sx', '-100rem');
+      started = false;
+    });
+  }
+}
 
 // Category filters (progressive enhancement: everything is visible without JS)
 const filters = document.querySelector('[data-filters]');

@@ -1,19 +1,21 @@
 <footer class="site-footer">
   <div class="container">
+    <p class="site-footer__stencil" aria-hidden="true">{{ site.Title }}</p>
     <div class="site-footer__grid">
-      <div>
+      <div class="site-footer__cell site-footer__cell--brand">
+        <p class="site-footer__label">{{ T "tech_sheet" }}</p>
         <p class="site-footer__brand">{{ site.Title }}</p>
         <p class="site-footer__tagline">{{ site.Params.tagline }}</p>
       </div>
-      <nav aria-label="{{ T "footer_navigation" }}">
-        <h2>{{ T "menu" }}</h2>
+      <nav class="site-footer__cell" aria-label="{{ T "footer_navigation" }}">
+        <h2 class="site-footer__label">{{ T "menu" }}</h2>
         <ul>
           {{- range site.Menus.main }}<li><a href="{{ .URL }}">{{ .Name }}</a></li>{{ end }}
           {{- with site.GetPage "/legal" }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}
         </ul>
       </nav>
-      <div>
-        <h2>{{ T "social" }}</h2>
+      <div class="site-footer__cell">
+        <h2 class="site-footer__label">{{ T "social" }}</h2>
         <ul>
           {{- range site.Params.social }}
           <li><a class="social-link" href="{{ .url }}" rel="me noopener" target="_blank">{{ partial "icon.html" .icon }}{{ .name }}</a></li>

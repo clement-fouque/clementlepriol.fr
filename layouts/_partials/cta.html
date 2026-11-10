@@ -1,8 +1,15 @@
-<section class="section cta" aria-labelledby="cta-title">
-  <div class="container">
-    <p class="eyebrow">{{ T "nav_contact" }}</p>
-    <h2 class="cta__title" id="cta-title" data-reveal>{{ T "home_contact_title" }}</h2>
-    <p data-reveal>{{ T "home_contact_text" }}</p>
-    {{ with site.GetPage "/contact" }}<a class="btn btn--light" href="{{ .RelPermalink }}" data-reveal>{{ T "write_me" }} <span class="arrow" aria-hidden="true">→</span></a>{{ end }}
+<section class="section curtain" aria-labelledby="cta-title">
+  <div class="container curtain__inner">
+    <div class="curtain__copy">
+      <p class="kicker">{{ T "kicker_curtain_call" }}</p>
+      <h2 class="curtain__title" id="cta-title" data-reveal>{{ T "home_contact_title" }}</h2>
+      <p class="curtain__text" data-reveal="15">{{ T "home_contact_text" }}</p>
+    </div>
+    {{ with site.GetPage "/contact" }}
+    <a class="go-key" href="{{ .RelPermalink }}" data-reveal="25">
+      <span class="go-key__cap" aria-hidden="true">{{ T "go" }}</span>
+      <span class="go-key__label">{{ T "write_me" }} <span aria-hidden="true">→</span></span>
+    </a>
+    {{ end }}
   </div>
 </section>

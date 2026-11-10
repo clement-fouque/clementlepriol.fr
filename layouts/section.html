@@ -1,12 +1,9 @@
 {{ define "main" }}
-<header class="container page-head">
-  <p class="eyebrow">{{ site.Title }}</p>
-  <h1 class="page-head__title">{{ .Title }}</h1>
-  {{ with .Params.lead }}<p class="page-head__lead">{{ . }}</p>{{ end }}
-</header>
+{{- $pages := .Pages.ByDate.Reverse }}
+{{- $kicker := cond (eq .Section "creations") (T "home_featured_creations") (T "kicker_cue_list") }}
+{{ partial "page-head.html" (dict "page" . "count" (len $pages) "kicker" $kicker) }}
 <div class="container section section--tight">
   {{- with .Content }}<div class="prose prose--flush">{{ . }}</div>{{ end }}
-  {{- $pages := .Pages.ByDate.Reverse }}
   {{- if $pages }}
     {{- if eq .Section "creations" }}
       {{- $cats := slice }}
@@ -15,14 +12,14 @@
       {{- if gt (len $cats) 1 }}
       <div class="filters" role="group" aria-label="{{ T "filter_label" }}" data-filters hidden>
         <button type="button" aria-pressed="true" data-filter="*">{{ T "filter_all" }}</button>
-        {{- range $cats }}<button type="button" aria-pressed="false" data-filter="{{ . }}">{{ partial "category-label.html" . }}</button>{{ end }}
+        {{- range $cats }}<button type="button" aria-pressed="false" data-filter="{{ . }}">{{ partial "gel.html" . }}</button>{{ end }}
       </div>
       {{- end }}
-      <div class="grid" data-filter-grid>
-        {{- range $i, $p := $pages }}{{ partial "card.html" (dict "page" $p "eager" (lt $i 2) "h" 2) }}{{ end }}
+      <div class="posters posters--grid" data-filter-grid>
+        {{- range $i, $p := $pages }}{{ partial "card.html" (dict "page" $p "n" (add $i 1) "eager" (lt $i 2) "h" 2) }}{{ end }}
       </div>
     {{- else }}
-      <ul class="list-rows">{{ range $pages }}{{ partial "row.html" (dict "page" . "h" 2) }}{{ end }}</ul>
+      {{ partial "cue-list.html" (dict "pages" $pages "total" (len $pages) "h" 2) }}
     {{- end }}
   {{- else }}
     <p class="empty">{{ T "empty_section" }}</p>

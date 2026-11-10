@@ -1,16 +1,19 @@
-{{- /* Params: page, h (heading level, default 3) */ -}}
+{{- /* Cue-list row. Params: page, q (cue number), h (heading level, default 3) */ -}}
 {{- $h := .h | default 3 }}
+{{- $q := .q }}
 {{- with .page }}
 {{- $cover := partial "cover.html" . }}
-<li class="row" data-reveal>
-  <a class="row__link" href="{{ .RelPermalink }}">
-    <time class="row__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_medium" }}</time>
-    <div>
-      <h{{ $h }} class="row__title">{{ .Title }}</h{{ $h }}>
-      {{ with .Params.summary }}<p class="row__summary">{{ . }}</p>{{ end }}
+<li class="cue" data-reveal>
+  <a class="cue__link" href="{{ .RelPermalink }}">
+    <span class="cue__q" aria-hidden="true"><span class="cue__go">GO</span>{{ $q }}</span>
+    <div class="cue__main">
+      <h{{ $h }} class="cue__title">{{ .Title }}</h{{ $h }}>
+      {{ with .Params.summary }}<span class="cue__summary">{{ . }}</span>{{ end }}
     </div>
-    <div class="row__thumb">
-      {{- with $cover }}{{ partial "picture.html" (dict "img" . "alt" "" "sizes" "(min-width: 48rem) 14rem, 100vw" "ratio" "3x2") }}{{ else }}<div class="card__placeholder" aria-hidden="true"></div>{{ end }}
+    <time class="cue__date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date | time.Format ":date_medium" }}</time>
+    <span class="cue__dur">{{ .ReadingTime }} min</span>
+    <div class="cue__thumb">
+      {{- with $cover }}{{ partial "picture.html" (dict "img" . "alt" "" "sizes" "9rem" "ratio" "3x2") }}{{ else }}{{ partial "gobo.html" }}{{ end }}
     </div>
   </a>
 </li>

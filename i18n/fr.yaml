@@ -14,7 +14,7 @@ social: Réseaux sociaux
 hero_cta_creations: Voir les créations
 hero_cta_diy: Lire les projets DIY
 hero_scroll: Défiler
-home_featured_creations: Créations à la une
+home_featured_creations: "À l'affiche"
 home_latest_diy: Derniers projets DIY
 home_about_title: Qui suis-je ?
 home_contact_title: Un projet, une idée, une collaboration ?
@@ -54,3 +54,16 @@ toc: Sommaire
 rss: Flux RSS
 made_with: Fait main avec Hugo, hébergé sur GitHub Pages.
 reading: Lecture
+kicker_note: "Note d'intention"
+kicker_now_showing: Créations
+kicker_cue_list: Conduite
+kicker_curtain_call: Rappel
+stage_jardin: Jardin
+stage_cour: Cour
+ghost_light: La servante — la lampe qui veille sur les scènes vides.
+cue_col: Q
+col_project: Projet
+col_date: Date
+col_duration: Durée
+tech_sheet: Fiche technique
+go: GO
