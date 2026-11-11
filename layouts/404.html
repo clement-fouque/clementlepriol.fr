@@ -1,10 +1,14 @@
 {{ define "main" }}
 <section class="container notfound">
-  <div>
-    <div class="notfound__code" data-code="404" aria-hidden="true"></div>
+  <div class="notfound__servante" aria-hidden="true">
+    <span class="servante__halo"></span>
+    {{ partial "servante.html" }}
+  </div>
+  <div class="notfound__copy">
+    <p class="notfound__code" aria-hidden="true">404</p>
     <h1 class="section__title">{{ T "not_found_title" }}</h1>
     <p class="notfound__text">{{ T "not_found_text" }}</p>
-    <a class="btn btn--solid" href="{{ site.Home.RelPermalink }}">{{ T "back_home" }} <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn btn--tape" href="{{ site.Home.RelPermalink }}">{{ T "back_home" }} <span class="arrow" aria-hidden="true">→</span></a>
   </div>
 </section>
 {{ end }}

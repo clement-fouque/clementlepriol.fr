@@ -1,0 +1,9 @@
+{{- /* Params: pages (newest first), total (cue count for numbering), h */ -}}
+<div class="cues">
+  <div class="cues__head" aria-hidden="true">
+    <span>{{ T "cue_col" }}</span><span>{{ T "col_project" }}</span><span>{{ T "col_date" }}</span><span>{{ T "col_duration" }}</span><span></span>
+  </div>
+  <ul class="cues__list">
+    {{- range $i, $p := .pages }}{{ partial "row.html" (dict "page" $p "q" (sub $.total $i) "h" $.h) }}{{ end }}
+  </ul>
+</div>
